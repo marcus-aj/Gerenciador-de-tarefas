@@ -62,6 +62,8 @@ function saveTask() {
     taskPriority    = $('#task_priority').val();
     taskStatus      = $('#task_status').val();
 
+    var statusId = taskStatus;
+
     var validate = this.formValidate(taskName, taskDate, taskPriority, taskStatus);
     this.formatInputs(taskDate, taskPriority, taskStatus);
 
@@ -94,8 +96,29 @@ function saveTask() {
     " </div>";
 
     if (validate) {
-        $('#do_card_content').append(taskCard);
+        this.setTaskCard(statusId, taskCard)
     }
+}
+
+function setTaskCard(statusId, taskCard) {
+    var card;
+
+    switch(statusId) {
+        case '1':
+            card = $('#do_card_content').append(taskCard);
+            break;
+        case '2':
+            card = $('#doing_card_content').append(taskCard);
+            break;
+        case '3':
+            card = $('#done_card_content').append(taskCard);
+            break;
+        default:
+            alert('ERRO');
+            break;
+    }
+
+    return card;
 }
 
 function formValidate(taskName, taskDate, taskPriority, taskStatus) {

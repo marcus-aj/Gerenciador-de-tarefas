@@ -57,19 +57,23 @@
     </header>
 
     <section>
-        <div class="container-fluid">
+        <div class="container-fluid px-4 mt-4">
             <div class="row">
-                <div class="col-md-12 text-center d-none p-0" id="new_task">
-                    <nav class="navbar bg-light">
+                <div class="col-md-12 text-center d-none-teste p-0" id="new_task">
+                    <nav class="rounded-10 navbar bg-light">
                         <div class="container-fluid">
-                            <input class="navbar-brand me-2" 
+                            <div>
+                                <i class="fa fa-search"></i>
+                            <input class="navbar-brand search"
                             type="search" placeholder="Pesquisar..." 
                             aria-label="Pesquisar">
+                            </div>
                           <form class="d-flex" role="search">                            
                             <button type="button" 
                                 class="btn btn-primary" 
                                 data-bs-toggle="modal" 
                                 data-bs-target="#modal_new_task">
+                                <i class= "fa fa-pen-to-square pe-2"></i>
                                 Nova tarefa
                             </button>
                           </form>
@@ -96,29 +100,28 @@
                 </div>
 
 
-                <div class="col-md-4 text-center">
-                    <div>
+                <div class="col-md-4 ">
+                    <div class="text-center">
                         <span>
                             <i class="fa-solid fa-person-running"></i>
                             Fazendo
                         </span>
                     </div>
                     <div class="mt-4">
-                        <div class="card">
-                            <h2>Conteudo fazendo</h2>
+                        <div id="doing_card_content">
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 text-center">
-                    <div>
+
+                <div class="col-md-4">
+                    <div class="text-center">
                         <span>
                             <i class="fa-sharp fa-solid fa-check"></i>
                             Feito
                         </span>
                     </div>     
                     <div class="mt-4">
-                        <div class="card">
-                            <h2>Conteudo feito</h2>
+                        <div id="done_card_content">
                         </div>
                     </div>               
                 </div>
