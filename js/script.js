@@ -1,15 +1,23 @@
 // VARIAVEIS GLOBAIS
-var taskId = 0;         
+var taskId = 0;
+var taskIdForm;         
 var taskName;       
 var taskResponsible;
 var taskDescription;
 var taskDate;       
 var taskPriority;   
-var taskStatus;     
+var taskStatus;
+
+this.setTaskId();
+
+function setTaskId() {
+    this.taskId ++;
+    $('#task_id').val(this.taskId);
+}
 
 function logar() {
-    const usuario = 'Cafu';
-    const senha = 'escova';
+    const usuario = 'Marcus';
+    const senha = '123';
 
     var name = document.getElementById('name').value;    
     var pass = document.getElementById('password').value;
@@ -67,37 +75,31 @@ function saveTask() {
     var validate = this.formValidate(taskName, taskDate, taskPriority, taskStatus);
     this.formatInputs(taskDate, taskPriority, taskStatus);
 
-    var taskCard = 
+    var taskCard =
     " <div class='card mb-4 text-left p-3 border-0' id=''> " +
+    "   <div class='action-icon'>" +
+    "       <i class='fa fa-pencil pe-2'></i>" +
+    "       <i class='fa fa-trash-can' onclick=deleteTask()></i>" +
+    "   </div>" +
     "   <div class='pb-3'> " +
-    "       <a href='#' class='text-decoration-none' id='name'> " +
-                taskName +
-    "       </a> " +
+    "       <a href='#' class='text-decoration-none' id='name'> " +taskName + "</a> " +
     "   </div> " +
     "   <div class='pb-3 d-none'> " +
-    "       <a href='#' class='' id='description'> " +
-                taskDescription +
-    "       </a> " +
+    "       <a href='#' class='' id='description'> " +taskDescription + "</a> " +
     "   </div> " +
     "   <div class='pb-2'> " +
-    "       <i class='fa fa-calendar pe-2' id='date'></i> " +
-            taskDate +
-    "   </div> " +
+    "       <i class='fa fa-calendar pe-2' id='date'></i> " +taskDate +"   </div> " +
     "   <div class='pb-3'> " +
-    "       <i class='fa fa-user pe-2' id='responsible'></i> " +
-            taskResponsible +
+    "       <i class='fa fa-user pe-2' id='responsible'></i> " +taskResponsible +
     "   </div> " +
-    "   <div id='priority'> " +
-            taskPriority +
-    "   </div> " +
-    "   <div id='status' class='d-none'> " +
-            taskStatus +
-    "   </div> " +
+    "   <div id='priority'> " +taskPriority +"   </div> " +
+    "   <div id='status' class='d-none'> " +taskStatus + "   </div> " +
     " </div>";
 
     if (validate) {
         this.setTaskCard(statusId, taskCard)
     }
+    this.setTaskId();
 }
 
 function setTaskCard(statusId, taskCard) {
