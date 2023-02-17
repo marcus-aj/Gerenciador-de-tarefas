@@ -71,35 +71,44 @@ function saveTask() {
     taskStatus      = $('#task_status').val();
 
     var statusId = taskStatus;
+    var taskPriorityId = taskPriority;
 
     var validate = this.formValidate(taskName, taskDate, taskPriority, taskStatus);
     this.formatInputs(taskDate, taskPriority, taskStatus);
 
     var taskCard =
-    " <div class='card mb-4 text-left p-3 border-0' id=''> " +
-    "   <div class='action-icon'>" +
-    "       <i class='fa fa-pencil pe-2'></i>" +
-    "       <i class='fa fa-trash-can' onclick=deleteTask()></i>" +
-    "   </div>" +
-    "   <div class='pb-3'> " +
-    "       <a href='#' class='text-decoration-none' id='name'> " +taskName + "</a> " +
+    " <div class='card mb-4 text-left p-3 border-0'> " +
+    "   <input class='d-none' id='id_card_"+ taskId +"' value="+ taskId +"> " +
+    "   <div class='d-flex align-items-center justify-content-between pb-3'>" +
+    "       <div class=''> " +
+    "           <a href='#' class='text-decoration-none'>" + taskName + "</a> " +
+    "           <input class='d-none' id='name_"+ taskId +"' value='" + taskName + "'> " +
+    "       </div> " +
+    "       <div class='action-icon'>" +
+    "           <i class='fa fa-pencil pe-2' data-bs-toggle='modal' data-bs-target='#modal_edit_task' onclick=editTask("+ taskId +")></i>" +
+    "           <i class='fa fa-trash-can' data-bs-toggle='modal' data-bs-target='#modal_delete_task' onclick='deleteTask("+ taskId +")'></i>" +
+    "       </div>" +
     "   </div> " +
     "   <div class='pb-3 d-none'> " +
-    "       <a href='#' class='' id='description'> " +taskDescription + "</a> " +
+    "       <input id='description_"+ taskId +"' value='" +taskDescription + "'> " +
     "   </div> " +
     "   <div class='pb-2'> " +
-    "       <i class='fa fa-calendar pe-2' id='date'></i> " +taskDate +"   </div> " +
+    "       <i class='fa fa-calendar pe-2'></i> " +taskDate +"   </div> " +
+    "       <input class='d-none' id='date_"+ taskId +"' value="+ taskDate +"> " +
     "   <div class='pb-3'> " +
-    "       <i class='fa fa-user pe-2' id='responsible'></i> " +taskResponsible +
+    "       <i class='fa fa-user pe-2'></i> " + taskResponsible +
+    "       <input class='d-none' id='responsible_"+ taskId +"' value='" + taskResponsible + "'> " +
     "   </div> " +
-    "   <div id='priority'> " +taskPriority +"   </div> " +
-    "   <div id='status' class='d-none'> " +taskStatus + "   </div> " +
+    "   <div> " + taskPriority +"   </div> " +
+    "   <input id='priority_"+ taskId +"' value='"+ taskPriorityId +"' class='d-none'> " +
+    "   <input id='status_"+ taskId +"' value='"+ statusId +"' class='d-none'> " +
     " </div>";
 
     if (validate) {
         this.setTaskCard(statusId, taskCard)
     }
     this.setTaskId();
+
 }
 
 function setTaskCard(statusId, taskCard) {
@@ -193,4 +202,14 @@ function getStatusName(taskStatus) {
             return 'Não definido';
     }
 }
+let deleteTaskId = ('');
+function deleteTask(task) {
+    deleteTaskId = task;
+    document.getElementById('idTask').innerHTML = task;
+}
 
+function confirmDelete(result) {
+    if (result === 'S') {
+        document.getElementById(deleteTaskId).remove();
+    }
+}
